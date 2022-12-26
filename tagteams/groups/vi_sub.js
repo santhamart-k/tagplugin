@@ -75,7 +75,7 @@ var vi_sendFirstEmail = () => {
 
 var vi_TagteamFocusCase = () => {
     try {
-
+        // console.log('ok')
         // ==== CODE - VAN BO
         var css = `#signature{
             background-color: #d0ecff;
