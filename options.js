@@ -41,6 +41,10 @@ function save_options() {
 		
 		chrome.browserAction.setBadgeText({text: 'CB' });
 		
+	}else if (country == "VietNamTest") {
+		
+		chrome.browserAction.setBadgeText({text: 'VNT' });
+		
 	}
 
     
