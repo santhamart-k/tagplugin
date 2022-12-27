@@ -78,7 +78,6 @@ var vi_TagteamFocusCase = () => {
         // console.log('ok')
         // ==== CODE - VAN BO
         
-	
 var css = `
 
 read-deck,write-deck{
@@ -934,8 +933,6 @@ var modalHtml = `
 
 var modalNode = document.createElement('div');
 modalNode.innerHTML = modalHtml;
-document.querySelector('#addToNote').addEventListener('click',addToNote);
-document.querySelector('#resetNote').addEventListener('click',resetNote);
 //collapse
 let coll = document.querySelectorAll(".collapsible");
 
@@ -951,6 +948,8 @@ for (let i = 0; i < coll.length; i++) {
   });
 }
 document.body.appendChild(modalNode);
+document.querySelector('#addToNote').addEventListener('click',addToNote);
+document.querySelector('#resetNote').addEventListener('click',resetNote);
 var modal = document.getElementById("sinature-modal");
 function addToNote(){
     // var noteHtml = `${document.querySelector('#preview-area').innerHTML = ()}`;
@@ -1473,7 +1472,7 @@ function prepareForEmail(isGCC = false){
 }
 
 function copyPhone(){
-  navigator.clipboard.writeText(phoneNumber);
+  __ChromeMessenger.sendMessage("callPhone", { autoCall: !0, phone: phoneNumber });
 }
 function insertText(newText, selector) {
   const textarea = document.querySelector(selector);
