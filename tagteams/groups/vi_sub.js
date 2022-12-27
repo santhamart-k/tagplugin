@@ -78,6 +78,7 @@ var vi_TagteamFocusCase = () => {
         // console.log('ok')
         // ==== CODE - VAN BO
         
+	
 var css = `
 
 read-deck,write-deck{
@@ -651,15 +652,15 @@ if (style.styleSheet){
 function renderDock(){
   var dock_float_html = `<div class="dock-float">
         <div class="dock-float-container">
-          <li class="li-2" onclick="openEmail()">
+          <li class="li-2 open-email">
             <div class="name">Send mail</div>
             <img class="ico" src="https://i.ibb.co/M2JS4BX/gmail.png" alt="">
           </li>
           <li class="li-3 click2call">
-            <div class="name">Click to copy</div>
-            <img class="ico click2call" src="https://i.ibb.co/Zhdf4BV/phone-call-mac.png" alt="" onclick="copyPhone()">
+            <div class="name">Click to call</div>
+            <img class="ico click2call" src="https://i.ibb.co/Zhdf4BV/phone-call-mac.png" alt="">
           </li>
-          <li  class="li-5" onclick="openNote()">
+          <li  class="li-5 open-note">
             <div class="name">Oncall Notes</div>
             <img class="ico"  src="https://uploads-ssl.webflow.com/5f7081c044fb7b3321ac260e/5f70853c849ec3735b52cef9_notes.png" alt="">
           </li>
@@ -669,19 +670,19 @@ function renderDock(){
           </li> -->
           <li class="li-10">
             <div class="name">Ads ICS</div>
-            <img class="ico" src="chrome-extension://ofmkdhohnpaebbejjhecmjjcjkjplklb/assets/icon-google-ads.png" alt="" style="width: 60%; height: 60%" onclick="adsICS()">
+            <img class="ico ads-ics" src="chrome-extension://ofmkdhohnpaebbejjhecmjjcjkjplklb/assets/icon-google-ads.png" alt="" style="width: 60%; height: 60%">
           </li>
           <li class="li-11">
             <div class="name">Gearloose</div>
-            <img class="ico" src="chrome-extension://ofmkdhohnpaebbejjhecmjjcjkjplklb/assets/icon-gearloose.png" alt="" style="width: 60%; height: 60%" onclick="gearloose()">
+            <img class="ico open-gearloose" src="chrome-extension://ofmkdhohnpaebbejjhecmjjcjkjplklb/assets/icon-gearloose.png" alt="" style="width: 60%; height: 60%">
           </li>
           <li class="li-12">
             <div class="name">OGT Dashboard</div>
-            <img class="ico" src="https://i.ibb.co/f1W83gY/dashboard.png" alt="" style="width: 60%; height: 60%" onclick="ogtDashboard()">
+            <img class="ico ogt-dashboard" src="https://i.ibb.co/f1W83gY/dashboard.png" alt="" style="width: 60%; height: 60%">
           </li>
           <li class="li-13">
             <div class="name">EC Dashboard</div>
-            <img class="ico" src="https://i.ibb.co/f1W83gY/dashboard.png" alt="" style="width: 60%; height: 60%" onclick="ecDashboard()">
+            <img class="ico ec-dashboard" src="https://i.ibb.co/f1W83gY/dashboard.png" alt="" style="width: 60%; height: 60%">
           </li>
 
         </div>
@@ -724,6 +725,13 @@ function renderDock(){
           });
         });
       });
+      document.querySelector('.open-email').addEventListener('click', openEmail)
+      document.querySelector('.click2call').addEventListener('click', copyPhone)
+      document.querySelector('.open-note').addEventListener('click', openNote)
+      document.querySelector('.ads-ics').addEventListener('click', adsICS)
+      document.querySelector('.open-gearloose').addEventListener('click', gearloose)
+      document.querySelector('.ogt-dashboard').addEventListener('click', ogtDashboard)
+      document.querySelector('.ec-dashboard').addEventListener('click', ecDashboard)
 }
 
 var modalHtml = `
@@ -891,8 +899,8 @@ var modalHtml = `
                   </div>
             </div>
   
-            <button id="addToNote" onclick="addToNote()">Add to note</button>
-            <button id="resetNote" onclick="resetNote()">Reset</button>
+            <button id="addToNote">Add to note</button>
+            <button id="resetNote">Reset</button>
           </div>
           <div id="preview-note" class="preview-note">
             <label style="
@@ -926,6 +934,8 @@ var modalHtml = `
 
 var modalNode = document.createElement('div');
 modalNode.innerHTML = modalHtml;
+document.querySelector('#addToNote').addEventListener('click',addToNote);
+document.querySelector('#resetNote').addEventListener('click',resetNote);
 //collapse
 let coll = document.querySelectorAll(".collapsible");
 
@@ -1463,10 +1473,7 @@ function prepareForEmail(isGCC = false){
 }
 
 function copyPhone(){
-    let sendCallRequest = (e) => {
-        __ChromeMessenger.sendMessage("callPhone", { autoCall: !0, phone: e });
-    }
-  sendCallRequest(phoneNumber);
+  navigator.clipboard.writeText(phoneNumber);
 }
 function insertText(newText, selector) {
   const textarea = document.querySelector(selector);
