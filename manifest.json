@@ -55,7 +55,8 @@
 				"tagteams/groups/ja_sub.js",
 
 				"tagteams/content_scripts.js",
-				"tagteams/init.js"
+				"tagteams/init.js",
+				"utils.js"
 			]
 		},
         {
