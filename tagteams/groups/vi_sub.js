@@ -1492,27 +1492,7 @@ function insertText(newText, selector) {
     console.error("paste unsuccessful, execCommand not supported");
   }
 }
-class ChromeMessenger extends EventEmitter {
-    constructor() {
-        super(), (this.requestsInProgress = 0), console.log("ChromeMessenger instance created");
-    }
-    sendMessage(e, t) {
-        return (
-            (t = { from: "msos", ...(t = "string" == typeof e ? { ...t, subject: e } : e) }),
-            this.requestsInProgress++,
-            this.emit("aboutToSend", t),
-            new Promise((e, s) => {
-                chrome.runtime.sendMessage(chrome.runtime.id, t, (r) => {
-                    r ? (this.requestsInProgress--, this.emit("responseReceived", r), this.checkInProgress(), e(r)) : s({ msg: "Something went wrong!", scope: document.currentScript, lastError: chrome.runtime.lastError, obj: t });
-                });
-            })
-        );
-    }
-    checkInProgress() {
-        0 === this.requestsInProgress && this.emit("allDone");
-    }
-}
-const __ChromeMessenger = new ChromeMessenger();
+
         // ==== END CODE - VAN BO       
     } catch (error) {
         console.error("tagteamFocusCase => ", error);
