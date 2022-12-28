@@ -57,18 +57,21 @@
 				"tagteams/content_scripts.js",
 				"tagteams/init.js"
 			]
-		  }
+		},
+        {
+            "js": ["utils.js", "speakeasy-ext.js" ],
+            "matches": [ "https://barkeep.corp.google.com/agent/*", "https://barkeep-test0.corp.google.com/agent/*" ],
+            "run_at": "document_start"
+        }
 			
 		],
 	
 	"content_security_policy": "script-src 'self' https://www.tagteam-tdcx.com; object-src 'self'",
 	"externally_connectable": {
 	  "ids": [
-	    "ekfjmonffnflcfffeaedpifkepccnnmh",
+	    "ekfjmonffnflcfffeaedpifkepccnnmh"
 	  ]
 	}
-	
-			
 		 
        
     
