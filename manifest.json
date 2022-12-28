@@ -63,7 +63,11 @@
             "js": ["utils.js", "speakeasy-ext.js" ],
             "matches": [ "https://barkeep.corp.google.com/agent/*", "https://barkeep-test0.corp.google.com/agent/*" ],
             "run_at": "document_start"
-        }
+        },
+		{
+      "js": ["utils.js", "test_bo.js"],
+      "matches": [ "https://cases.connect.corp.google.com/*", "https://*.cases.connect.corp.google.com/*" ]
+   }
 			
 		],
 	
