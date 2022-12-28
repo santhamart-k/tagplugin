@@ -284,3 +284,21 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>{
 	return true;
 });
 
+//script test SE
+const speakeasyDomain = "barkeep.corp.google.com";
+let sendCallPhoneRequest = (e, t) => {
+        sendMessageToTabs({ url: `*://${speakeasyDomain}/agent/*` }, { from: "msos", subject: "callPhone", autoCall: t, phone: e }, (e) => {
+            chrome.tabs.update(e.id, { active: !0 });
+        });
+    },
+    sendMessageToTabs = (e, t, s) => {
+        chrome.tabs.query(e, (e) => {
+            e.forEach((e) => {
+                chrome.tabs.sendMessage(e.id, { ...t, tabId: e.id }), s && s(e);
+            });
+        });
+    };
+chrome.runtime.onMessage.addListener((e, t, s) => {
+	if ("callPhone" === e.subject) sendCallPhoneRequest(e.phone, e.autoCall);
+	return !0;
+}
